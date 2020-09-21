@@ -1,0 +1,38 @@
+
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block user %} {{username}}{% endblock %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div class="container">
+    <div class="alert-secondary">
+
+    <form action="" method="POST" enctype="multipart/form-data" >
+    {% csrf_token %}
+        <div class="form-group">
+  <label for="comment">memo:</label>
+  {{ form.memo|add_class:'form-control' }}
+</div>
+
+    <p> {{form.images}}</p>
+<div class="checkbox">
+  <label>{{form.important}}important</label>
+</div>
+
+     <input  type="submit" value="update" class="btn btn-success btn-lg btn-block" >
+</form>
+
+
+<br> <a href="{% url 'note' %}" class="btn btn-secondary btn-lg  ">back</a>
+</div>
+</div>
+
+
+{% endblock content %}

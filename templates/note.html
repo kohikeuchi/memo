@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block user %} {{username}}{% endblock %}
+
+{% block title %}
+home
+{% endblock title %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+
+<br>
+<br>
+<br>
+<div class="container">
+  <a type="submit"  class="btn btn-info btn-lg btn-block"  href="{% url 'post' %}">click here for a new post </a>
+</div>
+{% for n in note %}
+
+<br>
+  <br>
+  <br>
+<div class="container">
+<div class="card " style="width: auto;">
+    {% if n.images %}
+  <a href="{{n.images.url}}" target="_blank"> <img src="{{n.images.url}}" class="card-img" > </a>
+    {% endif %}
+
+  <div class="card-body">
+    <h5 class="card-title">{{n.date}}</h5>
+    <p class="card-text">{{n.memo}}</p>
+      {% if n.important is True %}
+<p style="color: red;"> important </p>
+{% endif %}
+
+    <a href="{% url 'delete' n.id %}" class="btn btn-success">delete</a>
+    <a href="{% url 'edit' n.id %}" class="btn btn-secondary">edit</a>
+    <div class="radio">
+</div>
+
+
+  </div>
+</div>
+</div>
+<br>
+{% endfor %}
+
+<p class="user-select-all">This paragraph will be entirely selected when clicked by the user.</p>
+
+{% else %}
+<h1> please login </h1>
+{% endif %}
+
+
+
+{% endblock content %}
